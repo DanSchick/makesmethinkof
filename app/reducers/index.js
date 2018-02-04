@@ -11,10 +11,12 @@ const filter = (state = '', action) => {
     }
 };
 
-const chooseFirstThing = (state = '', action) => {
+const firstThing = (state = {}, action) => {
     switch (action.type) {
         case types.FIRST_THING_CHOSEN:
             return action.thing;
+        case types.RESET_FIRST_THING:
+            return {};
         default:
             return state;
     }
@@ -22,7 +24,7 @@ const chooseFirstThing = (state = '', action) => {
 
 const rootReducer = combineReducers({
     filter,
-    chooseFirstThing,
+    firstThing,
     routing
 });
 

@@ -8,9 +8,14 @@ export function filterTable(filter) {
 }
 
 export function chooseFirstThing(thing) {
-    console.log('here');
     return {
         type: types.FIRST_THING_CHOSEN,
         thing
+    };
+}
+
+export function resetFirstThing() {
+    return {
+        type: types.RESET_FIRST_THING,
     };
 }
