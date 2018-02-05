@@ -1,45 +1,72 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { filterTable } from '../actions';
+import { IMDBResults } from '../actions';
 import { chooseFirstThing } from '../actions';
 import { resetFirstThing } from '../actions';
 import FirstThing from '../components/FirstThing';
 import { filterableTable } from '../styles/filterableTable.scss';
 
-const FilterableTable = ({ filter, onFilter, onFirstChoose, onResetFirst, firstThing }) => {
-    let input;
+class FilterableTable extends React.Component {
+// const FilterableTable = ({ onSearch, onFirstChoose, onResetFirst, firstThing }) => {
+    componentWillMount() {
+        this.state = {
+            searchText: ''
+        };
+    }
 
-    return (
-        <div className={filterableTable}>
-            <input
-                value={filter}
-                ref={node => {input = node;}}
-                onChange={() => onFilter(input.value)} />
+    async queryIMDB(searchText) {
+        const response = await fetch('http://www.omdbapi.com/?apikey=215b996f&s=' + searchText);
+        await response.json().then(res => {
+            this.props.onResetFirst();
+            this.props.onSearch(res.Search);
+        });
+    }
 
-            <FirstThing filter={filter} onFirstChoose={onFirstChoose} onResetFirst={onResetFirst} firstThing={firstThing} />
-        </div>
-    );
-};
+    render() {
+        let input;
+        return (
+            <div className={filterableTable}>
+                <form onSubmit={ (e) => {
+                    e.preventDefault();
+                    this.queryIMDB(this.state.searchText);
+                }
+                }>
+                <input
+                    className={'mb-2'}
+                    ref={node => {input = node;}}
+                    onChange={() => this.setState({searchText: input.value})} />
+                &nbsp;&nbsp;
+                <span onClick={() => this.queryIMDB(this.state.searchText)}>
+                <i className="fas fa-search"></i>
+                </span>
+                </form>
+
+                <FirstThing onFirstChoose={this.props.onFirstChoose} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} firstThing={this.props.firstThing} />
+            </div>
+        );
+    }
+}
 
 FilterableTable.propTypes = {
     filter: PropTypes.string,
-    onFilter: PropTypes.func,
+    onSearch: PropTypes.func,
     onFirstChoose: PropTypes.func,
     onResetFirst: PropTypes.func,
+    movieResults: PropTypes.array,
     firstThing: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
     return {
-        filter: state.filter,
-        firstThing: state.firstThing
+        firstThing: state.firstThing,
+        movieResults: state.movieResults
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFilter: filterText => dispatch(filterTable(filterText)),
+        onSearch: movies => dispatch(IMDBResults(movies)),
         onFirstChoose: thingChosen => dispatch(chooseFirstThing(thingChosen)),
         onResetFirst: () => dispatch(resetFirstThing())
     };

@@ -1,9 +1,9 @@
 import * as types from './types';
 
-export function filterTable(filter) {
-    return {
-        type: types.FILTER,
-        filter
+export function IMDBResults(movies) {
+    return  {
+        type: types.IMDB_RESULTS,
+        movies
     };
 }
 

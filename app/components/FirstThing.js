@@ -2,41 +2,28 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ProductRow from './ProductRow';
 
-const things = [
-  { category: 'Movie', name: 'Memento' },
-  { category: 'Movie', name: 'The Prestige' },
-  { category: 'Movie', name: 'Toy Story' }
-];
-
-const FirstThing = ({ filter, onFirstChoose, onResetFirst, firstThing }) => {
+const FirstThing = ({ onFirstChoose, onResetFirst, firstThing, things }) => {
     let rows = [];
 
-    console.log(firstThing);
-    if(firstThing.name) {
-        rows.push(
-            <ProductRow key={firstThing.name} data={firstThing} onButton={onResetFirst}/>
-        );
-        return <div> {rows} </div>;
+    if(firstThing.Title) {
+        return ( <ProductRow key={firstThing.Title} data={firstThing} onButton={onResetFirst} /> );
     }
-    things.forEach(p => {
-        const nameLC = p.name.toLowerCase();
-        const filterLC = filter.toLowerCase();
-
-        if (nameLC.indexOf(filterLC) !== -1) {
+    if(things) {
+        things.forEach(p => {
             rows.push(
-                <ProductRow key={p.name} data={p} onButton={onFirstChoose}/>
+                <ProductRow key={p.Title} data={p} onButton={onFirstChoose} />
             );
-        }
-    });
+        });
+    }
 
     return <div> {rows} </div>;
 };
 
 FirstThing.propTypes = {
-    filter: PropTypes.string,
-    onFirstChoose: PropTypes.object,
-    onResetFirst: PropTypes.object,
-    firstThing: PropTypes.object
+    onFirstChoose: PropTypes.func,
+    onResetFirst: PropTypes.func,
+    firstThing: PropTypes.object,
+    things: PropTypes.array
 };
 
 export default FirstThing;

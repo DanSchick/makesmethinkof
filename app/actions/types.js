@@ -1,3 +1,3 @@
-export const FILTER = 'FILTER';
+export const IMDB_RESULTS = 'IMDB_RESULTS';
 export const FIRST_THING_CHOSEN = 'FIRST_THING_CHOSEN';
 export const RESET_FIRST_THING = 'RESET_FIRST_THING';

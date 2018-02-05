@@ -6,6 +6,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',
+    node: {
+        fs: "empty"
+    },
     entry: [
         'babel-polyfill',
         'webpack-dev-server/client?http://localhost:3000',
