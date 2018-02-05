@@ -26,7 +26,7 @@ class FilterableTable extends React.Component {
     render() {
         let input;
         return (
-            <div className={filterableTable}>
+            <div className={`${filterableTable} col-6`}>
                 <form onSubmit={ (e) => {
                     e.preventDefault();
                     this.queryIMDB(this.state.searchText);

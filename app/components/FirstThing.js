@@ -11,7 +11,7 @@ const FirstThing = ({ onFirstChoose, onResetFirst, firstThing, things }) => {
     if(things) {
         things.forEach(p => {
             rows.push(
-                <ProductRow key={p.Title} data={p} onButton={onFirstChoose} />
+                <ProductRow key={p.Title + p.Year} data={p} onButton={onFirstChoose} />
             );
         });
     }
