@@ -10,7 +10,7 @@ const ProductRow = ({ data, onButton }) => {
     //     button = (<a onClick={() => onButton(data)}><i className={'fas fa-check'}></i></a>);
     // }
     return (
-    <div onClick={() => onButton(data)} className={`${productRow} col-md-8 text-center`}>
+    <div onClick={() => onButton(data)} className={`${productRow} col-md-8 row text-center`}>
         <p><strong>{data.Title}</strong> ({data.Year})</p>
     </div>
     );

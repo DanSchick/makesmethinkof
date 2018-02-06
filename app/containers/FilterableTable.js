@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { IMDBResults } from '../actions';
 import { chooseFirstThing } from '../actions';
 import { resetFirstThing } from '../actions';
+import { chooseSecondThing } from '../actions';
+import { resetSecondThing } from '../actions';
+import { editFirstThing } from '../actions';
+import { editSecondThing } from '../actions';
 import FirstThing from '../components/FirstThing';
 import { filterableTable } from '../styles/filterableTable.scss';
 
@@ -23,10 +27,12 @@ class FilterableTable extends React.Component {
         });
     }
 
+
     render() {
         let input;
+        const onChoose = this.props.editing === 1 ? this.props.onFirstChoose : this.props.onSecondChoose;
         return (
-            <div className={`${filterableTable} col-6`}>
+            <div className={`${filterableTable} col-6 align-items-center`}>
                 <form onSubmit={ (e) => {
                     e.preventDefault();
                     this.queryIMDB(this.state.searchText);
@@ -42,17 +48,21 @@ class FilterableTable extends React.Component {
                 </span>
                 </form>
 
-                <FirstThing onFirstChoose={this.props.onFirstChoose} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} firstThing={this.props.firstThing} />
+                <FirstThing onChoose={onChoose} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} firstThing={this.props.firstThing} />
             </div>
         );
     }
 }
 
 FilterableTable.propTypes = {
-    filter: PropTypes.string,
     onSearch: PropTypes.func,
     onFirstChoose: PropTypes.func,
     onResetFirst: PropTypes.func,
+    onSecondChoose: PropTypes.func,
+    onResetSecond: PropTypes.func,
+    onEditFirstThing: PropTypes.func,
+    onEditSecondThing: PropTypes.func,
+    editing: PropTypes.number,
     movieResults: PropTypes.array,
     firstThing: PropTypes.object
 };
@@ -60,7 +70,8 @@ FilterableTable.propTypes = {
 const mapStateToProps = (state) => {
     return {
         firstThing: state.firstThing,
-        movieResults: state.movieResults
+        movieResults: state.movieResults,
+        editing: state.editing
     };
 };
 
@@ -68,7 +79,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onSearch: movies => dispatch(IMDBResults(movies)),
         onFirstChoose: thingChosen => dispatch(chooseFirstThing(thingChosen)),
-        onResetFirst: () => dispatch(resetFirstThing())
+        onResetFirst: () => dispatch(resetFirstThing()),
+        onSecondChoose: thingChosen => dispatch(chooseSecondThing(thingChosen)),
+        onResetSecond: () => dispatch(resetSecondThing()),
+        onEditFirstThing: () => dispatch(editFirstThing()),
+        onEditSecondThing: () => dispatch(editSecondThing())
     };
 };
 
