@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ProductRow from './ProductRow';
 
-const FirstThing = ({ onChoose, onResetFirst, firstThing, things }) => {
+const FirstThing = ({ onChoose, things }) => {
     let rows = [];
 
-    if(firstThing.Title) {
-        return ( <ProductRow key={firstThing.Title} data={firstThing} onButton={onResetFirst} /> );
-    }
+    // if(firstThing.Title) {
+    //     return ( <ProductRow key={firstThing.Title} data={firstThing} onButton={onResetFirst} /> );
+    // }
     if(things) {
         things.forEach(p => {
             rows.push(

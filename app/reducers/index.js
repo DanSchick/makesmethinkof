@@ -6,6 +6,8 @@ const movieResults = (state = [], action) => {
     switch (action.type) {
         case types.IMDB_RESULTS:
             return action.movies;
+        case types.RESET_IMDB_RESULTS:
+            return [];
         default:
             return state;
     }

@@ -7,6 +7,12 @@ export function IMDBResults(movies) {
     };
 }
 
+export function resetIMDBResults() {
+    return {
+        type: types.RESET_IMDB_RESULTS
+    };
+}
+
 export function chooseFirstThing(thing) {
     return {
         type: types.FIRST_THING_CHOSEN,
