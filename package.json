@@ -1,11 +1,12 @@
 {
-  "name": "webpack-react-redux",
+  "name": "Makes Me Think Of",
   "version": "1.0.0",
-  "description": "A boilerplate for playing around with react, redux and react-router with the help of webpack.",
+  "description": "Track the comparisons you're always thinking of",
   "main": "index.js",
   "scripts": {
     "test": "",
     "start": "node server",
+    "postinstall": "webpack -p",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint ."
   },
@@ -14,7 +15,7 @@
     "react",
     "redux"
   ],
-  "author": "Jean-Pierre Sierens",
+  "author": "Dan Schick",
   "license": "MIT",
   "dependencies": {
     "file-loader": "^0.9.0",
