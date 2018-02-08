@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
+    public: 'makesmethinkof.herokuapp.com'
     hot: true,
     historyApiFallback: true,
     // It suppress error shown in console, so it has to be set to false.
