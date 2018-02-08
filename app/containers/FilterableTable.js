@@ -23,7 +23,7 @@ class FilterableTable extends React.Component {
     }
 
     async queryIMDB(searchText) {
-        const response = await fetch('http://www.omdbapi.com/?apikey=215b996f&s=' + searchText);
+        const response = await fetch('https://www.omdbapi.com/?apikey=215b996f&s=' + searchText);
         await response.json().then(res => {
             this.props.onSearch(res.Search);
         });

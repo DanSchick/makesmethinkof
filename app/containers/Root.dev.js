@@ -5,7 +5,7 @@ import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux';
 
 import AppContainer from '../containers/AppContainer';
-import DevTools from './DevTools';
+// import DevTools from './DevTools';
 
 export default function Root({store, history}) {
     return (
@@ -14,7 +14,7 @@ export default function Root({store, history}) {
                 <ConnectedRouter history={history}>
                     <Route path="/" component={AppContainer}/>
                 </ConnectedRouter>
-                <DevTools />
+                {/* <DevTools /> */}
             </div>
         </Provider>
     );
