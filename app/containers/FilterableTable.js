@@ -29,6 +29,21 @@ class FilterableTable extends React.Component {
         });
     }
 
+    async onSubmit() {
+        const bodyJSON = JSON.stringify({
+            firstThing: this.props.firstThing,
+            secondThing: this.props.secondThing
+        });
+        const response = await fetch('https://makesmethinkof-backend.herokuapp.com/api/relation/insert', {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            method: 'post',
+            body: bodyJSON
+        });
+        console.log(response);
+    }
+
     render() {
         let input;
         const whichThingToChoose = this.props.editing === 1 ? this.props.onFirstChoose : this.props.onSecondChoose;
@@ -36,17 +51,18 @@ class FilterableTable extends React.Component {
         return (
             <div className={'row justify-content-center align-items-center text-center'}>
             <div className={'col-12'}>
-            <h1>
-                <div className={this.props.editing === 1 ? `d-inline ${currentThing}` : 'd-inline'}
-                    onClick={this.props.onEditFirstThing}>
-                    <u>{this.props.firstThing.Title ? this.props.firstThing.Title : 'This'}</u>
-                </div>
-                <span className={`${middleText}`}>&nbsp;Makes Me Think of&nbsp;</span>
-                <div className={this.props.editing === 2 ? `d-inline ${currentThing}` : 'd-inline'}
-                    onClick={this.props.onEditSecondThing}>
-                    <u>{this.props.secondThing.Title ? this.props.secondThing.Title : 'That'}</u>
-                </div>
-            </h1>
+                <h1>
+                    <div className={this.props.editing === 1 ? `d-inline ${currentThing}` : 'd-inline'}
+                        onClick={this.props.onEditFirstThing}>
+                        <u>{this.props.firstThing.Title ? this.props.firstThing.Title : 'This'}</u>
+                    </div>
+                    <span className={`${middleText}`}>&nbsp;Makes Me Think of&nbsp;</span>
+                    <div className={this.props.editing === 2 ? `d-inline ${currentThing}` : 'd-inline'}
+                        onClick={this.props.onEditSecondThing}>
+                        <u>{this.props.secondThing.Title ? this.props.secondThing.Title : 'That'}</u>
+                    </div>
+                </h1>
+            <button onClick={() => this.onSubmit()}>Submit</button>
             </div>
             <div className={`${filterableTable} col-6 align-items-center`}>
                 <form onSubmit={ (e) => {

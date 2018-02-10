@@ -11,6 +11,7 @@ const ProductRow = ({ data, onButton }) => {
     // }
     return (
     <div onClick={() => onButton(data)} className={`${productRow} col-md-8 row text-center`}>
+        <img src={data.Poster} width={'50'} height={'75'}/>
         <p><strong>{data.Title}</strong> ({data.Year})</p>
     </div>
     );
