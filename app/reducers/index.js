@@ -28,7 +28,7 @@ const secondThing = (state = {}, action) => {
     switch (action.type) {
         case types.SECOND_THING_CHOSEN:
             return action.thing;
-        case types.RESET_FIRST_THING:
+        case types.RESET_SECOND_THING:
             return {};
         default:
             return state;

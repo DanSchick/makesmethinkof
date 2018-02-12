@@ -7,6 +7,14 @@
 	color: #0000FF;
 }
 
+.thingTitle {
+	max-width: 30%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    overflow: hidden
+}
+
 .middleText {
 	color: gray;
 }

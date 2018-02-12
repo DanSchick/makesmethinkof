@@ -50,3 +50,10 @@ export function editSecondThing() {
         type: types.EDIT_SECOND_THING
     };
 }
+
+export function getRelationsForThing(thing) {
+    return {
+        type: types.GET_RELATIONS_FOR_THING,
+        thing
+    };
+}
