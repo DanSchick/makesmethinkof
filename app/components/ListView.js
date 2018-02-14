@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ListItem from './ListItem';
 
-const ListView = ({ show, onChoose, things, chosenThing, onResetFirst }) => {
+const ListView = ({ show, showCount, onChoose, things, chosenThing, onResetFirst }) => {
     let rows = [];
 
     if(chosenThing.Title) {
-        return ( <ListItem key={chosenThing.Title} data={chosenThing} onButton={onResetFirst} /> );
+        return ( <ListItem key={chosenThing.Title} showCount={showCount} data={chosenThing} onButton={onResetFirst} /> );
     }
     if(things && show) {
         things.forEach(p => {
             rows.push(
-                <ListItem key={p.imdbID} data={p} onButton={onChoose} />
+                <ListItem key={p.imdbID} showCount={showCount} data={p} onButton={onChoose} />
             );
         });
     }
@@ -24,6 +24,7 @@ ListView.propTypes = {
     onChoose: PropTypes.func,
     onResetFirst: PropTypes.func,
     chosenThing: PropTypes.object,
+    showCount: PropTypes.bool,
     things: PropTypes.array
 };
 

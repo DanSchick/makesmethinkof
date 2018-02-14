@@ -8,6 +8,34 @@ const movieResults = (state = [], action) => {
             return action.movies;
         case types.RESET_IMDB_RESULTS:
             return [];
+        case types.GET_RELATIONS_FOR_THING:
+            return action.movies;
+        case types.EDIT_FIRST_THING:
+            return [];
+        case types.EDIT_SECOND_THING:
+            return [];
+        default:
+            return state;
+    }
+};
+
+const fetchingResults = (state = false, action) => {
+    switch(action.type) {
+        case types.FETCHING_RESULTS:
+            return true;
+        case types.IMDB_RESULTS:
+            return false;
+        default:
+            return state;
+    }
+};
+
+const insertingRelation = (state = false, action) => {
+    switch(action.type) {
+        case types.INSERT_RELATION:
+            return true;
+        case types.HAS_INSERTED_RELATION:
+            return false;
         default:
             return state;
     }
@@ -18,6 +46,8 @@ const firstThing = (state = {}, action) => {
         case types.FIRST_THING_CHOSEN:
             return action.thing;
         case types.RESET_FIRST_THING:
+            return {};
+        case types.EDIT_FIRST_THING:
             return {};
         default:
             return state;
@@ -30,6 +60,8 @@ const secondThing = (state = {}, action) => {
             return action.thing;
         case types.RESET_SECOND_THING:
             return {};
+        case types.EDIT_SECOND_THING:
+            return  {};
         default:
             return state;
     }
@@ -37,6 +69,14 @@ const secondThing = (state = {}, action) => {
 
 const editing = (state = 1, action) => {
     switch (action.type) {
+        case types.RESET_FIRST_THING:
+            return 1;
+        case types.RESET_SECOND_THING:
+            return 2;
+        case types.SECOND_THING_CHOSEN:
+            return 1;
+        case types.FIRST_THING_CHOSEN:
+            return 2;
         case types.EDIT_FIRST_THING:
             return 1;
         case types.EDIT_SECOND_THING:
@@ -49,6 +89,8 @@ const editing = (state = 1, action) => {
 const rootReducer = combineReducers({
     movieResults,
     firstThing,
+    fetchingResults,
+    insertingRelation,
     secondThing,
     editing,
     routing

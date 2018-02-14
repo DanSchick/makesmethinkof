@@ -20,6 +20,24 @@ export function chooseFirstThing(thing) {
     };
 }
 
+export function fetchResults() {
+    return {
+        type: types.FETCHING_RESULTS
+    };
+}
+
+export function insertRelation() {
+    return {
+        type: types.INSERT_RELATION
+    };
+}
+
+export function hasInsertedRelation() {
+    return {
+        type: types.HAS_INSERTED_RELATION
+    };
+}
+
 export function resetFirstThing() {
     return {
         type: types.RESET_FIRST_THING,
@@ -51,9 +69,9 @@ export function editSecondThing() {
     };
 }
 
-export function getRelationsForThing(thing) {
+export function getRelationsForThing(movies) {
     return {
         type: types.GET_RELATIONS_FOR_THING,
-        thing
+        movies: movies
     };
 }

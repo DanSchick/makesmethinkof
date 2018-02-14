@@ -31,6 +31,7 @@ class ListItem extends React.Component {
     render() {
         const onButton = this.props.onButton;
         const data = this.props.data;
+        const count = data.count ? data.count : 0;
         return (
         <div onClick={() => onButton(data)} className={`${productRow} col-md-12 row text-center`}>
             <div className={'col-2 pt-2'}>
@@ -39,6 +40,7 @@ class ListItem extends React.Component {
             </div>
             <div className={'col-10'}>
             &nbsp;&nbsp;<p className={`${listItemTitle}`}><strong>{data.Title}</strong> ({data.Year})</p>
+            { this.props.showCount ? (<p style={{color: 'gray'}}>Count: {count}</p>) : null }
             </div>
         </div>
         );
@@ -49,7 +51,8 @@ class ListItem extends React.Component {
 ListItem.propTypes = {
     data: PropTypes.object,
     onButton: PropTypes.func,
-    deselect: PropTypes.bool
+    deselect: PropTypes.bool,
+    showCount: PropTypes.bool
 };
 
 export default ListItem;
