@@ -9,7 +9,7 @@ import { getRelationsForThing, fetchResults } from '../actions';
 import { insertRelation, hasInsertedRelation } from '../actions';
 import ListView from '../components/ListView';
 
-import { filterableTable, currentThing, middleText, thingTitle} from '../styles/filterableTable.scss';
+import { filterableTable, middleText, thingTitle, thingTitleCurrent} from '../styles/filterableTable.scss';
 
 class FilterableTable extends React.Component {
     constructor(props) {
@@ -74,27 +74,28 @@ class FilterableTable extends React.Component {
             <div className={'col-12'}>
             <div className={'col-12 row container justify-content-center align-items-center text-center'}>
                 <h1>
-                    <div className={this.props.editing === 1 ? `d-inline ${currentThing} col-4` : 'd-inline col-4'}
+                    <div className={'d-inline col-4'}
                         onClick={this.props.onEditFirstThing}>
-                        <u className={`${thingTitle}`}>{this.props.firstThing.Title ? this.props.firstThing.Title : 'This'}</u>
+                        <u className={this.props.editing === 1 ? `${thingTitleCurrent}` : `${thingTitle}`}>{this.props.firstThing.Title ? this.props.firstThing.Title : 'This'}</u>
                     </div>
                     <span className={`${middleText} col-4`}>&nbsp;Makes Me Think of&nbsp;</span>
-                    <div className={this.props.editing === 2 ? `d-inline ${currentThing} col-4` : 'd-inline col-4'}
+                    <div className={'d-inline col-4'}
                         onClick={this.props.onEditSecondThing}>
-                        <u className={`${thingTitle}`}>{this.props.secondThing.Title ? this.props.secondThing.Title : 'That'}</u>
+                        <u className={this.props.editing === 2 ? `${thingTitleCurrent}` : `${thingTitle}`}>{this.props.secondThing.Title ? this.props.secondThing.Title : 'That'}</u>
                     </div>
                 </h1>
             </div>
             <div className={'col-12 justify-content-center'}>
                 <button onClick={() => this.onSubmit()}>Submit</button>
             </div>
+            <br />
             <div className={'container'}>
             <div className={'row col-12'}>
                 <div className={'col-4'}>
                     <ListView show={this.props.editing === 1} showCount={false} onChoose={chooseFirst} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} chosenThing={this.props.firstThing} />
                     { this.props.insertingRelation === true ? <img src={'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif'} width={'25'} height={'25'}/> : '' }
                 </div>
-                <div className={`${filterableTable} col-4 align-items-center`}>
+                <div className={`${filterableTable} col-4 h-25 justify-content-center align-items-center`}>
                     <form onSubmit={ (e) => {
                         e.preventDefault();
                         this.queryIMDB(this.state.searchText);

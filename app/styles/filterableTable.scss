@@ -1,14 +1,23 @@
 .filterableTable {
 	padding: 20px;
-	background-color: beige;
-}
-
-.currentThing {
-	color: #0000FF;
+	background-color: #9ab;
+	border-radius: 25px;
 }
 
 .thingTitle {
+	color: #C3073F;
 	max-width: 30%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+	display: inline-block;
+	vertical-align: top;
+    overflow: hidden;
+}
+
+.thingTitleCurrent {
+	color: #5CDB95;
+	max-width: 30%;
+	vertical-align: top;
     white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
@@ -16,9 +25,14 @@
 }
 
 .middleText {
-	color: gray;
+	color: #fff;
 }
 
 u {
 	cursor: pointer;
+	color: #C3073F;
+}
+
+u:hover {
+    color: #5CDB95;
 }

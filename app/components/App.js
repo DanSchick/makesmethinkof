@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { footer } from '../styles/footer.scss';
-import { app } from '../styles/app.scss';
+// import { app } from '../styles/app.scss';
+import { overlay } from '../styles/app.scss';
 import Routes from '../routes';
 
 const App = () => {
     return (
-    <div className={`${app}container jumbotron h-100`}>
+    <div className={`${overlay} d-flex flex-column p-4`}>
         <div className={'row justify-content-center align-items-center text-center'}>
             { Routes }
         </div>
-        <div className={'row'}>
+        <div className={'row p-1'}>
             <footer className={footer}>
                 <Link to="/">Filterable Table</Link>
                 <Link to="/about">About</Link>

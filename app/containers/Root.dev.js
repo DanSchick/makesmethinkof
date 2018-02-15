@@ -4,13 +4,15 @@ import {Provider} from 'react-redux';
 import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux';
 
+import { overlay } from '../styles/app.scss';
+
 import AppContainer from '../containers/AppContainer';
 // import DevTools from './DevTools';
 
 export default function Root({store, history}) {
     return (
         <Provider store={store}>
-            <div>
+            <div className={`${overlay}`}>
                 <ConnectedRouter history={history}>
                     <Route path="/" component={AppContainer}/>
                 </ConnectedRouter>

@@ -40,7 +40,7 @@ class ListItem extends React.Component {
             </div>
             <div className={'col-10'}>
             &nbsp;&nbsp;<p className={`${listItemTitle}`}><strong>{data.Title}</strong> ({data.Year})</p>
-            { this.props.showCount ? (<p style={{color: 'gray'}}>Count: {count}</p>) : null }
+            { this.props.showCount ? (<p style={{color: '#fff'}}>Count: {count}</p>) : null }
             </div>
         </div>
         );
