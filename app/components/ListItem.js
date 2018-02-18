@@ -15,6 +15,9 @@ class ListItem extends React.Component {
                 imgLoaded: true
             });
         };
+        if(this.props.data.Poster === 'N/A') {
+            this.props.data.Poster = 'https://i.media-imdb.com/images/mobile/film-40x54.png';
+        }
         this.img.src = this.props.data.Poster;
     }
     // let button;
