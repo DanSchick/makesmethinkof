@@ -8,6 +8,8 @@ import { editFirstThing, editSecondThing } from '../actions';
 import { getRelationsForThing, fetchResults } from '../actions';
 import { insertRelation, hasInsertedRelation } from '../actions';
 import ListView from '../components/ListView';
+import { SlideDown } from 'react-slidedown';
+import '../styles/slidedown.css';
 
 import { filterableTable, middleText, thingTitle, thingTitleCurrent} from '../styles/filterableTable.scss';
 
@@ -87,13 +89,15 @@ class FilterableTable extends React.Component {
             </div>
             <div className={'col-12 justify-content-center'}>
                 <button onClick={() => this.onSubmit()}>Submit</button>
+                    { this.props.insertingRelation === true ? <img src={'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif'} width={'25'} height={'25'}/> : '' }
             </div>
             <br />
             <div className={'container'}>
             <div className={'row col-12'}>
                 <div className={'col-4'}>
-                    <ListView show={this.props.editing === 1} showCount={false} onChoose={chooseFirst} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} chosenThing={this.props.firstThing} />
-                    { this.props.insertingRelation === true ? <img src={'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif'} width={'25'} height={'25'}/> : '' }
+                    <SlideDown>
+                    { this.props.editing === 1 || this.props.firstThing ? <ListView show={this.props.editing === 1} showCount={false} onChoose={chooseFirst} onResetFirst={this.props.onResetFirst} things={this.props.movieResults} chosenThing={this.props.firstThing} /> : null }
+                    </SlideDown>
                 </div>
                 <div className={`${filterableTable} col-4 h-25 justify-content-center align-items-center`}>
                     <form onSubmit={ (e) => {
@@ -113,7 +117,9 @@ class FilterableTable extends React.Component {
                     </form>
                 </div>
                 <div className={'col-4'}>
-                    <ListView show={this.props.editing === 2} showCount={true} onChoose={this.props.onSecondChoose} onResetFirst={this.props.onResetSecond} things={this.props.movieResults} chosenThing={this.props.secondThing} />
+                <SlideDown>
+                    { this.props.editing === 2 || this.props.secondThing ? <ListView show={this.props.editing === 2} showCount={true} onChoose={this.props.onSecondChoose} onResetFirst={this.props.onResetSecond} things={this.props.movieResults} chosenThing={this.props.secondThing} /> : null }
+                </SlideDown>
                 </div>
             </div>
             </div>

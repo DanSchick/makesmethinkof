@@ -20,12 +20,6 @@ class ListItem extends React.Component {
         }
         this.img.src = this.props.data.Poster;
     }
-    // let button;
-    // if( deselect === true) {
-    //     button = (<a onClick={() => onButton(data)}><i className={'fas fa-times'}></i></a>);
-    // } else {
-    //     button = (<a onClick={() => onButton(data)}><i className={'fas fa-check'}></i></a>);
-    // }
     showImage() {
         console.log('here');
         this.setState({imgLoaded: true});
