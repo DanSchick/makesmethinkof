@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
 const movieResults = (state = [], action) => {
-    switch (action.type) {
+    switch(action.type) {
         case types.IMDB_RESULTS:
             return action.movies;
         case types.RESET_IMDB_RESULTS:
@@ -42,7 +42,7 @@ const insertingRelation = (state = false, action) => {
 };
 
 const firstThing = (state = {}, action) => {
-    switch (action.type) {
+    switch(action.type) {
         case types.FIRST_THING_CHOSEN:
             return action.thing;
         case types.RESET_FIRST_THING:
@@ -54,8 +54,24 @@ const firstThing = (state = {}, action) => {
     }
 };
 
+// this is to display a 'none found' message after searching for relations if the result is empty
+const relationSearchMode = (state = false, action ) => {
+    switch(action.type) {
+        case types.GET_RELATIONS_FOR_THING:
+            return true;
+        case types.SECOND_THING_CHOSEN:
+            return false;
+        case types.RESET_FIRST_THING:
+            return false;
+        case types.EDIT_FIRST_THING:
+            return false;
+        default:
+            return state;
+    }
+};
+
 const secondThing = (state = {}, action) => {
-    switch (action.type) {
+    switch(action.type) {
         case types.SECOND_THING_CHOSEN:
             return action.thing;
         case types.RESET_SECOND_THING:
@@ -68,7 +84,7 @@ const secondThing = (state = {}, action) => {
 };
 
 const editing = (state = 1, action) => {
-    switch (action.type) {
+    switch(action.type) {
         case types.RESET_FIRST_THING:
             return 1;
         case types.RESET_SECOND_THING:
@@ -91,6 +107,7 @@ const rootReducer = combineReducers({
     firstThing,
     fetchingResults,
     insertingRelation,
+    relationSearchMode,
     secondThing,
     editing,
     routing

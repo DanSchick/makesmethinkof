@@ -22,7 +22,8 @@ class FilterableTable extends React.Component {
         this.state = {
             searchText: '',
             thisText: 'This',
-            openSearch: false
+            openSearch: false,
+            fetchingRelations: false
         };
     }
 
@@ -34,6 +35,8 @@ class FilterableTable extends React.Component {
         });
     }
     async queryGetRelations(thing) {
+        this.setState({ fetchingRelations: true});
+        setTimeout(() => {this.setState({fetchingRelations: false});}, 1000);
         const bodyJSON = JSON.stringify({
             firstThing: thing
         });
@@ -45,7 +48,6 @@ class FilterableTable extends React.Component {
             body: bodyJSON
         });
         await request.json().then(res => {
-            console.log(res);
             this.props.onGetRelations(res);
         });
     }
@@ -115,10 +117,14 @@ class FilterableTable extends React.Component {
                             { this.props.fetchingResults === true ? <img src={'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif'} width={'25'} height={'25'}/> : '' }
                         </span>
                     </form>
+                    <div>
+                        { this.props.relationSearchMode && !this.state.fetchingRelations ? 'Suggestions: ' : null }
+                        { this.props.editing === 2 ? <ListView show={this.props.editing === 2} showCount={true} onChoose={this.props.onSecondChoose} chosenThing={this.props.secondThing} things={this.props.movieResults} fetchingRelations={this.state.fetchingRelations} relationSearchMode={this.props.relationSearchMode} /> : null }
+                    </div>
                 </div>
                 <div className={'col-4'}>
                 <SlideDown>
-                    { this.props.editing === 2 || this.props.secondThing ? <ListView show={this.props.editing === 2} showCount={true} onChoose={this.props.onSecondChoose} onResetFirst={this.props.onResetSecond} things={this.props.movieResults} chosenThing={this.props.secondThing} /> : null }
+                    { this.props.editing === 2  && !this.props.relationSearchMode || this.props.secondThing ? <ListView show={this.props.editing === 2} showCount={true} onChoose={this.props.onSecondChoose} onResetFirst={this.props.onResetSecond} things={this.props.relationSearchMode ? null : this.props.movieResults} chosenThing={this.props.secondThing} relationSearchMode={this.props.relationSearchMode} /> : null }
                 </SlideDown>
                 </div>
             </div>
@@ -141,6 +147,7 @@ FilterableTable.propTypes = {
     onGetRelations: PropTypes.func,
     onInsertRelation: PropTypes.func,
     onHasInsertedRelation: PropTypes.func,
+    relationSearchMode: PropTypes.bool,
     editing: PropTypes.number,
     movieResults: PropTypes.array,
     fetchingResults: PropTypes.bool,
@@ -155,6 +162,7 @@ const mapStateToProps = (state) => {
         secondThing: state.secondThing,
         fetchingResults: state.fetchingResults,
         insertingRelation: state.insertingRelation,
+        relationSearchMode: state.relationSearchMode,
         movieResults: state.movieResults,
         editing: state.editing
     };

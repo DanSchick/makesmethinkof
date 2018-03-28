@@ -36,7 +36,7 @@ class ListItem extends React.Component {
             { this.state.imgLoaded === true ? <img src={data.Poster} width={50} height={75} /> : '' }
             </div>
             <div className={'col-10'}>
-            &nbsp;&nbsp;<p className={`${listItemTitle}`}><strong>{data.Title}</strong> ({data.Year})</p>
+            &nbsp;&nbsp;<p className={`${listItemTitle} pl-3`}><strong>{data.Title}</strong> ({data.Year})</p>
             { this.props.showCount ? (<p style={{color: '#fff'}}>Count: {count}</p>) : null }
             </div>
         </div>
