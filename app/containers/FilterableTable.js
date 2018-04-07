@@ -58,6 +58,8 @@ class FilterableTable extends React.Component {
             firstThing: this.props.firstThing,
             secondThing: this.props.secondThing
         });
+        this.props.secondThing.count += 1;
+        console.log(this.props.secondThing);
         const response = await fetch('https://makesmethinkof-backend.herokuapp.com/api/relation/insert', {
             headers: new Headers({
                 'Content-Type': 'application/json'
