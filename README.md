@@ -1,4 +1,6 @@
-# (Makes Me Think of)[makesmethinkof.herokuapp.com]
+# Makes Me Think of 
+
+[Link](makesmethinkof.herokuapp.com)
 
 This site allows you to track the comparisons you're always thinking of in your head.
 
